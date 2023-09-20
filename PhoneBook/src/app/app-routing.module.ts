@@ -18,6 +18,10 @@ const routes: Routes = [
   {
     path: 'dashboard',
     loadChildren: () => import('./pages/dashboard/dashboard.module').then( m => m.DashboardPageModule)
+  },
+  {
+    path: 'detail/:phoneNumber',
+    loadChildren: () => import('./pages/detail/detail.module').then( m => m.DetailPageModule)
   }
 ];
 @NgModule({
