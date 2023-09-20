@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Contacts, ContactsPlugin} from '@capacitor-community/contacts';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardPage implements OnInit {
 
-  constructor() { }
+  contactsList! : any[];
+
+  constructor(private contacts: ContactsPlugin) { }
 
   ngOnInit() {
   }
