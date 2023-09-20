@@ -14,7 +14,7 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
-  signIn(email:any, password:any){
+  logIn(email:any, password:any){
     this.authService.SignIn(email, password)
     .then(():any => {
       this.router.navigate(['dashboard']);
@@ -22,6 +22,10 @@ export class LoginPage implements OnInit {
     .catch((error) => {
       window.alert(error.message)
     })
+  }
+
+  navigateToRegister(){
+    this.router.navigate(['register'])
   }
 
 }

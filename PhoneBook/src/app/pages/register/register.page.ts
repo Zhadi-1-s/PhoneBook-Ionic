@@ -18,11 +18,14 @@ export class RegisterPage implements OnInit {
     this.authService
       .RegisterUser(email.value, password.value)
       .then((res) => {
-        // Do something here
+        window.alert('user created succesfully')
+        this.router.navigate(['dashboard'])
       })
       .catch((error) => {
         window.alert(error.message);
       });
   }
+
+ 
 
 }

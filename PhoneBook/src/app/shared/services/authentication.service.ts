@@ -37,14 +37,9 @@ export class AuthenticationService {
     return this.ngFireAuth.signInWithEmailAndPassword(email,password);
    }
 
-    RegisterUser(email:string, password: string){
+   RegisterUser(email:string, password: string){
     return this.ngFireAuth.createUserWithEmailAndPassword(email, password)
    }
-
-   get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
-    return user !== null && user.emailVerified !== false ? true : false;
-  }
 
   GoogleAuth() {
     return this.AuthLogin(new auth.GoogleAuthProvider());
@@ -73,9 +68,9 @@ export class AuthenticationService {
       email: user.email,
       displayName: user.displayName,
     };
-    return userRef.set(userData, {
+    return userRef.set(userData), {
       merge: true,
-    });
+    };
   }
 
   SignOut() {
