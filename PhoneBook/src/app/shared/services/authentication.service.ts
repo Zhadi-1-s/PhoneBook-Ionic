@@ -16,7 +16,7 @@ export class AuthenticationService {
   userData : any;
 
   constructor(
-    public afsStore:AngularFirestore,
+    public afStore:AngularFirestore,
     public ngFireAuth:AngularFireAuth,
     public router: Router,
     public ngZone: NgZone
@@ -33,5 +33,56 @@ export class AuthenticationService {
     });
    }
 
+   SignIn(email:string, password:string){
+    return this.ngFireAuth.signInWithEmailAndPassword(email,password);
+   }
+
+    RegisterUser(email:string, password: string){
+    return this.ngFireAuth.createUserWithEmailAndPassword(email, password)
+   }
+
+   get isLoggedIn(): boolean {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    return user !== null && user.emailVerified !== false ? true : false;
+  }
+
+  GoogleAuth() {
+    return this.AuthLogin(new auth.GoogleAuthProvider());
+  }
+
+  AuthLogin(provider: any) {
+    return this.ngFireAuth
+      .signInWithPopup(provider)
+      .then((result) => {
+        this.ngZone.run(() => {
+          this.router.navigate(['dashboard']);
+        });
+        this.SetUserData(result.user);
+      })
+      .catch((error) => {
+        window.alert(error);
+      });
+  }
+
+  SetUserData(user: any) {
+    const userRef: AngularFirestoreDocument<any> = this.afStore.doc(
+      `users/${user.uid}`
+    );
+    const userData: User = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+    };
+    return userRef.set(userData, {
+      merge: true,
+    });
+  }
+
+  SignOut() {
+    return this.ngFireAuth.signOut().then(() => {
+      localStorage.removeItem('user');
+      this.router.navigate(['login']);
+    });
+  }
 
 }
