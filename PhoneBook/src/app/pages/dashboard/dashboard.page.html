@@ -5,16 +5,12 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-list>
+  <ion-list padding *ngFor="let contact of contactsList">
     <ion-card>
       <ion-card-header>
-        <ion-card-title>Card Title</ion-card-title>
-        <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+        <ion-card-title><h2>{{ contact.name.givenName }} {{ contact.name.familyName }}</h2></ion-card-title>
+        <ion-card-subtitle><p>{{ contact.phones[0]?.value || 'N/A' }}</p></ion-card-subtitle>
       </ion-card-header>
-    
-      <ion-card-content>
-        Here's a small text description for the card content. Nothing more, nothing less.
-      </ion-card-content>
     </ion-card>
   </ion-list>
 </ion-content>
