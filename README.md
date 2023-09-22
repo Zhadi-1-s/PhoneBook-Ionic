@@ -40,5 +40,11 @@ npx cap open android
 
 # Java version 17.0.5
 
+# Android studio veriosn: Electric Eel | 2022.1.1
+
+# Android Gradle Plugin Version: 7.4.0
+
+# Gradle version: 7.5
+
 # All the dependencies and version you can see in package.json and package-lock.json
 
